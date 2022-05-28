@@ -1,3 +1,11 @@
+# About
+
+This is the redacted and sanitized MessageNet mobile-UI v3 candidate written in React. The purpose of this repo is merely to demonstrate that I have worked in React and that I'm familiar with it. It is not meant to be production code, and does not reveal or expose anything about MessageNet products or their inner-workings.
+
+This was initially created as a prototype/demonstrator intended to demonstrate one among several possible refactors for the new version, in support of feasibility and owner decision making; and is not considered a complete or fully-functional production version, by any means.
+
+Moreover, it was requested that I start this fresh as possible, and distance it from the MNS platform as much as possible; so to that end, I have spun up a new React project and refactored it to be as standalone as possible. Back-end connectivity has been stripped out and replaced with local file-based simulation data.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
