@@ -1,0 +1,14 @@
+{
+  "name": "json-mock-api",
+  "version": "1.0.0",
+  "description": "A simple JSON mock API for emulating MessageNet's backend to service the React PoC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Rider",
+  "license": "Proprietary Software",
+  "dependencies": {
+    "json-server": "^0.17.0"
+  }
+}
