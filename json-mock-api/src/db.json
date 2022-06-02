@@ -1,138 +1,157 @@
 {
-  "userClasses": [
-    {
-      "id": 1,
-      "class_name": "Admin"
-    },
-    {
-      "id": 2,
-      "class_name": "Staff"
-    },
-    {
-      "id": 3,
-      "class_name": "User"
-    }
-  ],
-
-  "users": [
-    {
-      "id": 1,
-      "first_name": "Sys",
-      "last_name": "Admin",
-      "email": "SysAdmin@localhost",
-      "userClassId": 1
-    },
-    {
-      "id": 2,
-      "first_name": "John",
-      "last_name": "Doe",
-      "email": "johndoe@abc.com",
-      "userClassId": 2
-    },
-    {
-      "id": 3,
-      "first_name": "Jane",
-      "last_name": "Doe",
-      "email": "janedoe@abc.com",
-      "userClassId": 2
-    },
-    {
-      "id": 4,
-      "first_name": "Alice",
-      "last_name": "Doe",
-      "email": "alicedoe@abc.com",
-      "userClassId": 3
-    }
-  ],
-
-  "messages": [
-    {
-      "id": 1,
-      "name": "Write Anything Message",
-      "description": "A general message template for sending anything you want.",
-      "messageBody": "You have received a message from #SENDER: #BODY",
-      "userClassId_canSend": 3,
-      "userId_author": 1
-    },
-    {
-      "id": 2,
-      "name": "Fire Emergency - General",
-      "description": "General fire alarm message.",
-      "messageBody": "FIRE! Evacuate immediately and report to your muster station.",
-      "userClassId_canSend": 2,
-      "userId_author": 1
-    },
-    {
-      "id": 3,
-      "name": "Active Shooter - General",
-      "description": "General active shooter message.",
-      "messageBody": "ACTIVE SHOOTER! Lock and barricade all doors. Turn off lights and stay low to the ground out of sight.",
-      "userClassId_canSend": 2,
-      "userId_author": 1
-    },
-    {
-      "id": 4,
-      "name": "John's Backup Reminder",
-      "description": "Reminder message to perform daily backups.",
-      "messageBody": "Remember to do your backups before leaving.",
-      "userClassId_canSend": 2,
-      "userId_author": 2
-    },
-    {
-      "id": 5,
-      "name": "Request Assistance in Office",
-      "description": "Allow a visitor to request assistance in the office.",
-      "messageBody": "A visitor is requesting assistance in the main office.",
-      "userClassId_canSend": 3,
-      "userId_author": 3
-    }
-  ],
-
-  "favorites": [
-    {
-      "id": 1,
-      "userId": 1,
-      "messageId": 1,
-      "icon": "",
-      "title": "",
-      "description": "Administrator's write-anything message",
-      "toggleable": false
-    },
-    {
-      "id": 2,
-      "userId": 2,
-      "messageId": 1,
-      "icon": "",
-      "title": "Send any message",
-      "description": "John's write-anything message",
-      "toggleable": true
-    },
-    {
-      "id": 3,
-      "userId": 2,
-      "messageId": 2,
-      "icon": "",
-      "title": "Trigger Fire Alarm!",
-      "description": "John's fire alarm message",
-      "toggleable": true
-    },
-    {
-      "id": 4,
-      "userId": 2,
-      "messageId": 3,
-      "icon": "",
-      "title": "Trigger Active Shooter!",
-      "description": "John's active shooter message",
-      "toggleable": true
-    },
-    {
-      "id": 5,
-      "userId": 2,
-      "messageId": 4,
-      "icon": "",
-      "title": "",
-      "description": "John's backup reminder message",
-      "toggleable": false
-    }
-  ]
+  "data": {
+    "userClasses": [
+      {
+        "id": 1,
+        "class_name": "Admin"
+      },
+      {
+        "id": 2,
+        "class_name": "Staff"
+      },
+      {
+        "id": 3,
+        "class_name": "User"
+      }
+    ],
+    "users": [
+      {
+        "id": 1,
+        "userClassId": 1,
+        "first_name": "Sys",
+        "last_name": "Admin",
+        "email": "SysAdmin@localhost",
+        "favCategories": [
+          { "type": "emergency", "label": "Emergency", "theme": "default" },
+          { "type": "shared", "label": "Shared", "theme": "default" },
+          { "type": "personal", "label": "Personal", "theme": "default" }
+        ]
+      },
+      {
+        "id": 2,
+        "userClassId": 2,
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "johndoe@abc.com",
+        "favCategories": [
+          { "type": "emergency", "label": "Emergency", "theme": "default" },
+          { "type": "shared", "label": "Shared", "theme": "default" },
+          { "type": "personal", "label": "Personal", "theme": "default" }
+        ]
+      },
+      {
+        "id": 3,
+        "userClassId": 2,
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "email": "janedoe@abc.com",
+        "favCategories": [
+          { "type": "emergency", "label": "Emergency", "theme": "default" },
+          { "type": "shared", "label": "Shared", "theme": "default" },
+          { "type": "personal", "label": "Personal", "theme": "default" }
+        ]
+      },
+      {
+        "id": 4,
+        "first_name": "Alice",
+        "last_name": "Doe",
+        "email": "alicedoe@abc.com",
+        "favCategories": [
+          { "type": "emergency", "label": "Emergency", "theme": "default" },
+          { "type": "shared", "label": "Shared", "theme": "default" },
+          { "type": "personal", "label": "Personal", "theme": "default" }
+        ],
+        "userClassId": 3
+      }
+    ],
+    "messages": [
+      {
+        "id": 1,
+        "name": "Write Anything Message",
+        "description": "A general message template for sending anything you want.",
+        "messageBody": "You have received a message from #SENDER: #BODY",
+        "userClassId_canSend": 3,
+        "userId_author": 1
+      },
+      {
+        "id": 2,
+        "name": "Fire Emergency - General",
+        "description": "General fire alarm message.",
+        "messageBody": "FIRE! Evacuate immediately and report to your muster station.",
+        "userClassId_canSend": 2,
+        "userId_author": 1
+      },
+      {
+        "id": 3,
+        "name": "Active Shooter - General",
+        "description": "General active shooter message.",
+        "messageBody": "ACTIVE SHOOTER! Lock and barricade all doors. Turn off lights and stay low to the ground out of sight.",
+        "userClassId_canSend": 2,
+        "userId_author": 1
+      },
+      {
+        "id": 4,
+        "name": "John's Backup Reminder",
+        "description": "Reminder message to perform daily backups.",
+        "messageBody": "Remember to do your backups before leaving.",
+        "userClassId_canSend": 2,
+        "userId_author": 2
+      },
+      {
+        "id": 5,
+        "name": "Request Assistance in Office",
+        "description": "Allow a visitor to request assistance in the office.",
+        "messageBody": "A visitor is requesting assistance in the main office.",
+        "userClassId_canSend": 3,
+        "userId_author": 3
+      }
+    ],
+    "favorites": [
+      {
+        "id": 1,
+        "userId": 1,
+        "messageId": 1,
+        "icon": "",
+        "label": "",
+        "description": "Administrator's write-anything message",
+        "toggleable": false
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "messageId": 1,
+        "icon": "",
+        "label": "Send any message",
+        "description": "John's write-anything message",
+        "toggleable": true
+      },
+      {
+        "id": 3,
+        "userId": 2,
+        "messageId": 2,
+        "icon": "",
+        "label": "Trigger Fire Alarm!",
+        "description": "John's fire alarm message",
+        "toggleable": true
+      },
+      {
+        "id": 4,
+        "userId": 2,
+        "messageId": 3,
+        "icon": "",
+        "label": "Trigger Active Shooter!",
+        "description": "John's active shooter message",
+        "toggleable": true
+      },
+      {
+        "id": 5,
+        "userId": 2,
+        "messageId": 4,
+        "icon": "",
+        "label": "",
+        "description": "John's backup reminder message",
+        "toggleable": false
+      }
+    ]
+  }
 }

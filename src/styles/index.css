@@ -1,0 +1,18 @@
+/*****************************************************
+ * MessageNet Connections Mobile v3
+ *
+ * MessageNet Systems, Inc.
+ * Copyright (c) 1991-2022 MessageNet Systems, Inc.
+ *
+ * In exclusive license to Chris Rider to distribute 
+ * for non-commercial purposes and work demonstration.
+ *****************************************************/
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

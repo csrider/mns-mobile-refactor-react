@@ -12,7 +12,12 @@ This is the redacted and sanitized version of the MessageNet mobile-UI v3 candid
 
 *Connections Mobile* allows users to have easy access to messages they want to launch, and to be able to control the *Connections* platform in the palm of their hand (in addition to modernizing and unifying a single interface across all devices)... it's not constrained to just "mobile."
 
-This project is what would have eventually become the refactored production version of the next major version of an established product (*Connections Mobile* currently exists in production as v2).
+For more information, screenshots, etc. about the currently deployed mobile app I built, see the following links:
+
+- http://www.messagenetsystems.com/home/solutions/connections-mobile-app/
+- http://www.messagenetsystems.com/home/solutions/connections-mobile-app/details/
+
+This project is what would have eventually become the refactored production version of the next major version of an established product (*Connections Mobile* is currently deployed as v2).
 
 ## Why Does This Repo Exist?
 

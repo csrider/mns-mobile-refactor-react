@@ -1,0 +1,165 @@
+/*****************************************************
+ * MessageNet Connections Mobile v3
+ *
+ * TODO: Refactor to use flex! (started, needs finished)
+ *
+ * MessageNet Systems, Inc.
+ * Copyright (c) 1991-2022 MessageNet Systems, Inc.
+ *
+ * In exclusive license to Chris Rider to distribute 
+ * for non-commercial purposes and work demonstration.
+ *****************************************************/
+
+
+/*****************************************************
+ * App and App-Global Styles 
+ */
+
+#app-container {
+  background-color: white;
+  padding: 0px;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
+/* not yet implemented
+.modal {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 30rem;
+  z-index: 10;
+  position: fixed;
+  top: 20vh;
+  left: calc(50% - 15rem);
+}
+*/
+
+
+/*****************************************************
+ * Header Styles 
+ */
+
+#app-header-container {
+  /* vertical flex for this element in main app */
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+
+  /* implement horizontal flex for children */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 10px;
+
+  /* give children room to breathe along edges */
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+
+  /* coloring */
+  background-color: #49727b;
+  color: #000000;
+}
+
+/* all major child elements of the app-header-container */
+.app-header-item {
+  color: #000000;
+}
+
+#app-header-logo {
+  width: 60px;  /*shrink image down, keeping aspect ratio*/
+}
+
+/* override and customize h1 element in header */
+#app-header-title {
+  /* get rid of default h1 top and bottom margins */
+  margin-top: 0.0em;
+  margin-bottom: 0.0em;
+}
+
+/* override and customize h1 element in header */
+#app-header-subtitle {
+  /* get rid of default h2 top and bottom margins */
+  margin-top: 0.0em;
+  margin-bottom: 0.0em;
+}
+
+#app-header-menu {
+  width: 60px;
+}
+
+
+/*****************************************************
+ * Body Styles
+ */
+
+#app-body-container {
+  /* vertical flex for this element in main app */
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+
+  /* give children room to breathe along edges */
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+
+  /* coloring */
+  background-color: #cccccc;
+  color: #000000;
+}
+
+
+/*****************************************************
+ * Footer Styles
+ */
+
+#app-footer-container {
+  /* vertical flex for this element in main app */
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+
+  /* implement horizontal flex for children */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 10px;
+
+  /* give children room to breathe along edges */
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+
+  /* coloring */
+  background-color: gray;
+  color: #000000;
+}
+
+
+.header-bar {
+  padding: 0.2em;
+  overflow: overlay;
+  background-color: lightgray;
+}
+
+.header-text {
+  float: left;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.header-menu {
+  float: right;
+}
