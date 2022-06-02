@@ -4,7 +4,13 @@ A simple JSON mock API for emulating MessageNet's backend, in order to service t
 
 Just for speed and simplicity, the mock DB/API is contained in a single monolithic JSON file.
 
-Each top-level key will be the endpoint URL.
+Each top-level key will be the endpoint URL:
+
+- http://localhose:3001/db (entire dataset)
+- http://localhose:3001/userClasses (everything in userClasses)
+- http://localhose:3001/users (everything in users)
+- http://localhose:3001/messages (everything in messages)
+- http://localhose:3001/favorites (everything in favorites)
 
 # How to Use
 
