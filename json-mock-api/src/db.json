@@ -18,6 +18,8 @@
       {
         "id": 1,
         "userClassId": 1,
+        "username": "sysadmin",
+        "password": "sysadmin",
         "first_name": "Sys",
         "last_name": "Admin",
         "email": "SysAdmin@localhost",
@@ -30,6 +32,8 @@
       {
         "id": 2,
         "userClassId": 2,
+        "username": "johndoe",
+        "password": "johndoe",
         "first_name": "John",
         "last_name": "Doe",
         "email": "johndoe@abc.com",
@@ -42,6 +46,8 @@
       {
         "id": 3,
         "userClassId": 2,
+        "username": "janedoe",
+        "password": "janedoe",
         "first_name": "Jane",
         "last_name": "Doe",
         "email": "janedoe@abc.com",
@@ -53,6 +59,9 @@
       },
       {
         "id": 4,
+        "userClassId": 3,
+        "username": "alicedoe",
+        "password": "alicedoe",
         "first_name": "Alice",
         "last_name": "Doe",
         "email": "alicedoe@abc.com",
@@ -60,8 +69,7 @@
           { "type": "emergency", "label": "Emergency", "theme": "default" },
           { "type": "shared", "label": "Shared", "theme": "default" },
           { "type": "personal", "label": "Personal", "theme": "default" }
-        ],
-        "userClassId": 3
+        ]
       }
     ],
     "messages": [

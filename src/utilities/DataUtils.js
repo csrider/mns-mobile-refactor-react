@@ -61,4 +61,16 @@ export default class DataUtils {
   static parseFavCatsForUser(data, userId) {
 
   }
+
+  /** Get user-class name for a given class-id
+   * NOTE: Temporary thing for now, so no validation or stuff yet!
+   */
+  static getUserClassNameById(objData, classId) {
+    if (!objData || !classId) return "";
+    const userClasses = objData.userClasses;
+    const arrMatches = userClasses.filter((data) => {
+      return data.id == classId;
+    });
+    return arrMatches[0].class_name;
+  }
 }
