@@ -39,25 +39,26 @@
 .login-field {
   margin-bottom: 1em;
 }
-
+/* not yet styled
 #login-user-label {
   
 }
-
+*/
 #login-user-field {
   overflow: hidden;
   max-width: 32ch;
 }
-
+/* not yet styled
 #login-pass-label {
 
 }
-
+*/
 #login-pass-field {
   overflow: hidden;
   max-width: 32ch;
 }
-
+/* not yet styled
 #login-button {
 
 }
+*/
