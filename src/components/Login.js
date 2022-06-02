@@ -39,15 +39,21 @@ function Login(props) {
   // Render
   return (
     <div>
-      
       <Form
         id={domAttribsLogin.form.id}
         data-testid={domAttribsLogin.form.dataTestId}
         onSubmit={handleFormSubmit}
       >
         <Form.Group size="lg" controlId="username">
-          <Form.Label>Username</Form.Label>
+          <Form.Label
+            id={domAttribsLogin.userLabel.id}
+            className={domAttribsLogin.userLabel.classes}
+          >
+            Username
+          </Form.Label>
           <Form.Control
+            id={domAttribsLogin.userField.id}
+            className={domAttribsLogin.userField.classes}
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -55,8 +61,15 @@ function Login(props) {
         </Form.Group>
 
         <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label
+            id={domAttribsLogin.passLabel.id}
+            className={domAttribsLogin.passLabel.classes}
+          >
+            Password
+          </Form.Label>
           <Form.Control
+            id={domAttribsLogin.passField.id}
+            className={domAttribsLogin.passField.classes}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -67,7 +80,6 @@ function Login(props) {
           Login
         </Button>
       </Form>
-
     </div>
   );
 }

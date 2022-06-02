@@ -24,3 +24,40 @@
   background-color: #cccccc;
   color: #000000;
 }
+
+#login-form {
+  /* pad children */
+  padding-top: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.login-label {
+  font-weight: bold;
+}
+
+.login-field {
+  margin-bottom: 1em;
+}
+
+#login-user-label {
+  
+}
+
+#login-user-field {
+  overflow: hidden;
+  max-width: 32ch;
+}
+
+#login-pass-label {
+
+}
+
+#login-pass-field {
+  overflow: hidden;
+  max-width: 32ch;
+}
+
+#login-button {
+
+}

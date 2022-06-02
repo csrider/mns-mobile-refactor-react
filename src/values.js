@@ -100,14 +100,30 @@ export const DomAttribs = {
         id: "login-form",
         dataTestId: "login-form",
       },
+      userLabel: {
+        id: "login-user-label",
+        dataTestId: "login-user-label",
+        classes: "login-label",
+      },
       userField: {
         id: "login-user-field",
         dataTestId: "login-user-field",
+        classes: "login-field",
+      },
+      passLabel: {
+        id: "login-pass-label",
+        dataTestId: "login-pass-label",
+        classes: "login-label",
       },
       passField: {
         id: "login-pass-field",
         dataTestId: "login-pass-field",
-      }
+        classes: "login-field",
+      },
+      loginButton: {
+        id: "login-button",
+        dataTestId: "login-button",
+      },
     };
   },
   getApp: function() {
