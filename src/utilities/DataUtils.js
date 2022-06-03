@@ -69,6 +69,7 @@ export default class DataUtils {
 
   /********************************************/
   /** TEMPORARY STUFF FOR PROOF OF CONCEPT... */
+  //  A lot of this will migrate to backend or middleware!
 
   // Parse user-class name for a given class-id
   // Ex--> "userClasses": [ {"id": 1, "label": "Admin"}, ... ]
@@ -88,12 +89,33 @@ export default class DataUtils {
     return arrMatches[0];
   }
 
+  // Parse user-record for a given user-id
+  // Ex--> "users": [ {"id": 1, "userClassId": 1, "username": "sysadmin", ...}, ... ]
+  static parseUserRecordByUserId(objDB, userId) {
+    if (!objDB || !userId) return {};
+    const users = objDB.users;
+    const arrMatches = users.filter((data) => {return data.id === userId;});
+    return arrMatches[0];
+  }
+
+  // Parse user-record for a given auth-token
+  // Ex--> "authTokens": [ {"id": 1, "userId": 1, "token": "ab12_userId_1"}, ... ]
+  // Ex--> "users": [ {"id": 1, "userClassId": 1, "username": "sysadmin", ...}, ... ]
+  static parseUserRecordByAuthToken(objDB, authToken) {
+    if (!objDB || !authToken) return {};
+    const authTokens = objDB.authTokens;
+    const arrMatches = authTokens.filter((data) => {return data.token === authToken;});
+    const userId = arrMatches[0].userId;
+    return DataUtils.parseUserRecordByUserId(objDB, userId);
+  }
+
   // Parse auth-token for a given user-id
   // Ex--> "authTokens": [ {"id": 1, "userId": 1, "token": "ab12_userId_1"}, ... ]
   static parseAuthTokenByUserId(objDB, userId) {
-    if (!objDB || !userId) return "";
+    if (!objDB || !userId) return null;
     const authTokens = objDB.authTokens;
     const arrMatches = authTokens.filter((data) => {return data.userId === userId;});
+    if (DataUtils.typeofBetter(arrMatches) !== 'array') return null;
     return arrMatches[0].token;
   }
 
