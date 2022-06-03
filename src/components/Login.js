@@ -1,6 +1,10 @@
 /*****************************************************
  * MessageNet Connections Mobile v3
  * Component for user login
+ * 
+ * DEV-NOTE: Migrate this to a class-component, especially
+ * if you want to use more advanced capabilities (such as
+ * using setState callbacks, which hooks don't support)!
  *
  * MessageNet Systems, Inc.
  * Copyright (c) 1991-2022 MessageNet Systems, Inc.
@@ -16,18 +20,18 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { menuLoggedOut, DomAttribs } from "../values.js";
 import DataUtils from "../utilities/DataUtils";
-import NetUtils from "../utilities/NetUtils";
+//import NetUtils from "../utilities/NetUtils";
 
 function Login(props) {
   // Setup hooks
-  const [userId, setUserId] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userRecord, setUserRecord] = useState({});
 
   /***************************************************/
   // DEV-NOTE: THIS GETS REMOVED FOR PRODUCTION!
-  // Retrieve all data from the mock API and save to state
+
+  // Retrieve ALL data from the mock API and save to state
   const [demoData, setDemoData] = useState({});
   const [demoUserData, setUserDemoData] = useState([]);
   useEffect(() => {
@@ -54,6 +58,17 @@ function Login(props) {
         //setLoading(false);
       });
   }, []); //empty dependency array so only run once
+
+  // Handle mock-api/demo login form submission
+
+  // 
+  const [authToken, setAuthToken] = useState("");
+  useEffect(() => {
+    // Check for valid auth-token (and also only execute this hook if it's been saved)
+    if (authToken.length > 0) {
+      // Allow user to proceed to main screen (pass token via props)
+    }
+  }, []); //empty dependency array so only run once
   /***************************************************/
 
   // Get html-element attribute data
@@ -72,9 +87,6 @@ function Login(props) {
   async function handleFormSubmit(event) {
     event.preventDefault(); //ensure page doesn't refresh
 
-    // Define our API endpoint to POST to
-    //const strEndpoint = "";
-
     // Get the username and password from state and package it up
     // DEMO NOTE: Our mock API doesn't easily handle relational data
     //  so just for this purpose, query by user ID that's in state.
@@ -85,38 +97,33 @@ function Login(props) {
     };
     */
 
-    /* TEST TO SEE IF POST WORKS --it does!
+    /* TEST TO SEE IF AXIOS-POST / MOCK-API WORKS --it does!
     const testToken = {
       "id": 99,
       "userId": 4,
       "token": "gh78_userId_4"
     }
-    await axios.post(strEndpoint, testToken);
-    //await axios.post(strEndpoint, jsonData);
+    await axios.post("http://localhost:3001/", testToken);
+    //await axios.post("http://localhost:3001/", jsonData);
     //axios.console.error();
     */
 
-    // For our purpose here, without a real API, we just authenticate
-    // TODO: reset a to-be-developed loading state to normal here
+    /* PLAYING AROUND
+    const res = await axios.get(`http://localhost:3001/user?byUsername=${username}`);
+    if (res.data[0] && res.data[0].username == username) {
+      setUserRecord(DataUtils.copyDeep_objectOfJSON(res.data[0]));
+    }
+    */
+
+    // For our purpose here, without a real API, we just authenticate statically
+    // TODO: since we await above, reset a to-be-developed "loading" state to normal HERE
 
     // FOR DEMO, JUST MATCH LOGIN WITH DATA ALREADY LOCALIZED
-    // - Determine the userId from the entered username and save to state
-    // - Get an auth token from db.json, by passing the saved userId via GET
-    // - Continue to main app screen while passing token by props?
-    let locUserRecord = {};
-    let res = await axios.get(`http://localhost:3001/user?byUsername=${username}`);
-    if (res.data[0] && res.data[0].username == username) {
-      //valid user... save their record to state and proceed to auth
-      locUserRecord = DataUtils.copyDeep_objectOfJSON(res.data[0]);
-      setUserRecord(DataUtils.copyDeep_objectOfJSON(res.data[0]));
-
-      //try to get the pre-defined auth token for demo
-      res = await axios.get(`http://localhost:3001/auth?byUserId=${userRecord.id}`);
-      //if (res.data[0] && res.data[0].)
-      
-    }
-    //setUserId(axios.response)
-    let getReq = `http://localhost:3001/auth?byUserId=${userId}`;
+    // - Parse the auth-token from local data and save to state
+    // - That save (and resulting render) will trigger useEffect hook that will...
+    //    useEffect: Check for valid auth-token, and allow user to proceed to main screen (pass token via props)
+    const locAuthToken = DataUtils.parseAuthTokenByUserId(demoData, username);
+    if (locAuthToken.length > 0) setAuthToken(locAuthToken);
   }
 
   // Render
@@ -216,7 +223,7 @@ function Login(props) {
                 {userObj.first_name} {userObj.last_name}
               </td>
               <td>
-                {DataUtils.getUserClassNameById(demoData, userObj.userClassId)}
+                {DataUtils.parseUserClassNameById(demoData, userObj.userClassId)}
               </td>
               <td>{userObj.username}</td>
               <td>{userObj.password}</td>
