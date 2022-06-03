@@ -108,7 +108,7 @@ function Login(props) {
     if (res.data[0] && res.data[0].username == username) {
       //valid user... save their record to state and proceed to auth
       locUserRecord = DataUtils.copyDeep_objectOfJSON(res.data[0]);
-      await setUserRecord(DataUtils.copyDeep_objectOfJSON(res.data[0]));
+      setUserRecord(DataUtils.copyDeep_objectOfJSON(res.data[0]));
 
       //try to get the pre-defined auth token for demo
       res = await axios.get(`http://localhost:3001/auth?byUserId=${userRecord.id}`);
