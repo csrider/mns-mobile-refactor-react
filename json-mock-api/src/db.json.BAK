@@ -1,17 +1,8 @@
 {
   "userClasses": [
-    {
-      "id": 1,
-      "label": "Admin"
-    },
-    {
-      "id": 2,
-      "label": "Staff"
-    },
-    {
-      "id": 3,
-      "label": "User"
-    }
+    { "id": 1, "label": "Admin" },
+    { "id": 2, "label": "Staff" },
+    { "id": 3, "label": "User" }
   ],
   "users": [
     {
@@ -23,21 +14,9 @@
       "last_name": "Admin",
       "email": "SysAdmin@localhost",
       "favCategories": [
-        {
-          "type": "emergency",
-          "label": "Emergency",
-          "theme": "default"
-        },
-        {
-          "type": "shared",
-          "label": "Shared",
-          "theme": "default"
-        },
-        {
-          "type": "personal",
-          "label": "Personal",
-          "theme": "default"
-        }
+        { "type": "emergency", "label": "Emergency", "theme": "default" },
+        { "type": "shared", "label": "Shared", "theme": "default" },
+        { "type": "personal", "label": "Personal", "theme": "default" }
       ]
     },
     {
@@ -49,21 +28,9 @@
       "last_name": "Doe",
       "email": "johndoe@abc.com",
       "favCategories": [
-        {
-          "type": "emergency",
-          "label": "Emergency",
-          "theme": "default"
-        },
-        {
-          "type": "shared",
-          "label": "Shared",
-          "theme": "default"
-        },
-        {
-          "type": "personal",
-          "label": "Personal",
-          "theme": "default"
-        }
+        { "type": "emergency", "label": "Emergency", "theme": "default" },
+        { "type": "shared", "label": "Shared", "theme": "default" },
+        { "type": "personal", "label": "Personal", "theme": "default" }
       ]
     },
     {
@@ -75,21 +42,9 @@
       "last_name": "Doe",
       "email": "janedoe@abc.com",
       "favCategories": [
-        {
-          "type": "emergency",
-          "label": "Emergency",
-          "theme": "default"
-        },
-        {
-          "type": "shared",
-          "label": "Shared",
-          "theme": "default"
-        },
-        {
-          "type": "personal",
-          "label": "Personal",
-          "theme": "default"
-        }
+        { "type": "emergency", "label": "Emergency", "theme": "default" },
+        { "type": "shared", "label": "Shared", "theme": "default" },
+        { "type": "personal", "label": "Personal", "theme": "default" }
       ]
     },
     {
@@ -101,21 +56,9 @@
       "last_name": "Doe",
       "email": "alicedoe@abc.com",
       "favCategories": [
-        {
-          "type": "emergency",
-          "label": "Emergency",
-          "theme": "default"
-        },
-        {
-          "type": "shared",
-          "label": "Shared",
-          "theme": "default"
-        },
-        {
-          "type": "personal",
-          "label": "Personal",
-          "theme": "default"
-        }
+        { "type": "emergency", "label": "Emergency", "theme": "default" },
+        { "type": "shared", "label": "Shared", "theme": "default" },
+        { "type": "personal", "label": "Personal", "theme": "default" }
       ]
     }
   ],

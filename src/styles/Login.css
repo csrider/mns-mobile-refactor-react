@@ -30,6 +30,11 @@
   padding-top: 1em;
   padding-left: 2em;
   padding-right: 2em;
+
+  /* center form horizontally */
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .login-label {
@@ -39,26 +44,35 @@
 .login-field {
   margin-bottom: 1em;
 }
+
 /* not yet styled
 #login-user-label {
-  
 }
 */
+
 #login-user-field {
   overflow: hidden;
   max-width: 32ch;
 }
+
 /* not yet styled
 #login-pass-label {
-
 }
 */
+
 #login-pass-field {
   overflow: hidden;
   max-width: 32ch;
 }
+
+.button-container {
+  /* center button(s) within */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* not yet styled
 #login-button {
-
 }
 */

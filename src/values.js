@@ -120,6 +120,11 @@ export const DomAttribs = {
         dataTestId: "login-pass-field",
         classes: "login-field",
       },
+      buttonContainer: {
+        id: "login-button-container",
+        dataTestId: "login-button-container",
+        classes: "button-container",
+      },
       loginButton: {
         id: "login-button",
         dataTestId: "login-button",
