@@ -69,8 +69,8 @@ export default class DataUtils {
     if (!objData || !classId) return "";
     const userClasses = objData.userClasses;
     const arrMatches = userClasses.filter((data) => {
-      return data.id == classId;
+      return data.id === classId;
     });
-    return arrMatches[0].class_name;
+    return arrMatches[0].label;
   }
 }
