@@ -94,7 +94,7 @@ export default class DataUtils {
     if (!objDB || !userId) return "";
     const authTokens = objDB.authTokens;
     const arrMatches = authTokens.filter((data) => {return data.userId === userId;});
-    return arrMatches[0].label;
+    return arrMatches[0].token;
   }
 
   // Parse auth-token for a given username
@@ -102,8 +102,7 @@ export default class DataUtils {
   static parseAuthTokenByUsername(objDB, username) {
     if (!objDB || !username) return "";
     const userId = DataUtils.parseUserRecordByUsername(objDB, username).id;
-    const authTokens = objDB.authTokens;
-    const arrMatches = authTokens.filter((data) => {return data.userId === userId;});
-    return arrMatches[0];
+    const authToken = DataUtils.parseAuthTokenByUserId(objDB, userId);
+    return authToken;
   }
 }
