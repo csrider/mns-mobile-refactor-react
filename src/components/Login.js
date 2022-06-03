@@ -57,7 +57,7 @@ function Login(props) {
       .finally(() => {
         //setLoading(false);
       });
-  }, []); //empty dependency array so only run once
+  }, []); //empty dependencies array, so only run once
 
   // Handle mock-api/demo login form submission
 
@@ -67,8 +67,9 @@ function Login(props) {
     // Check for valid auth-token (and also only execute this hook if it's been saved)
     if (authToken.length > 0) {
       // Allow user to proceed to main screen (pass token via props)
+      console.log("PROCEED TO MAIN!");
     }
-  }, []); //empty dependency array so only run once
+  }); //blank dependencies array for now, may specify state later to trigger re-subscription of this hook?
   /***************************************************/
 
   // Get html-element attribute data
@@ -84,7 +85,7 @@ function Login(props) {
   }
 
   // Form handling: Submit
-  async function handleFormSubmit(event) {
+  function handleFormSubmit(event) {
     event.preventDefault(); //ensure page doesn't refresh
 
     // Get the username and password from state and package it up
@@ -122,7 +123,7 @@ function Login(props) {
     // - Parse the auth-token from local data and save to state
     // - That save (and resulting render) will trigger useEffect hook that will...
     //    useEffect: Check for valid auth-token, and allow user to proceed to main screen (pass token via props)
-    const locAuthToken = DataUtils.parseAuthTokenByUserId(demoData, username);
+    const locAuthToken = DataUtils.parseAuthTokenByUsername(demoData, username);
     if (locAuthToken.length > 0) setAuthToken(locAuthToken);
   }
 
