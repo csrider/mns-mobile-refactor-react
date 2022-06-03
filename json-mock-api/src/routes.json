@@ -1,0 +1,6 @@
+{
+  "/db": "/db",
+  "/user?byUsername=*": "/users?username=$1",
+  "/auth?byUserId=*": "/authTokens?userId=$1",
+  "/auth?byToken=*": "/authTokens?token=$1"
+}
