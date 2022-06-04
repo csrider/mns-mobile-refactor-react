@@ -1,7 +1,7 @@
 /*****************************************************
  * MessageNet Connections Mobile v3
  * App entrypoint
- * 
+ *
  * TODO: Migrate this to class components if this PoC is chosen!
  *       Also re-work .js and .jsx file extensions as needed.
  *
@@ -18,30 +18,34 @@ import * as Strings from "../utilities/Strings.js";
 import { AppHeader, AppBody, AppFooter } from "./AppMainSections";
 import { menuMainApp, DomAttribs } from "../values.js";
 
+// This is our main App container-component
 function App(props) {
-  // Extract our props
-  const route = props.route;
-
-  // Setup hooks
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState("");
+  // Setup state hooks
+  const [authToken, setAuthToken] = useState(props.authToken || null);
   const [mockDataAll, setMockDataAll] = useState(null); //FAKE FOR PORTFOLIO
   //const [loading, setLoading] = useState(true);
   //const [error, setError] = useState(null);
 
+  // Define some readability enhancements
+  // DEV-NOTE: later see about passing forward as handlers, and allowing calls/events back (DRY)
+  const isAuthenticated = () => Boolean(authToken); //DEV-NOTE: make more robust if developed, obviously
+  const unAuthenticate = () => setAuthToken(null);
+
   // Process user-auth independently of rendering the page
   // MODIFIED/REDACTED FOR PORTFOLIO!
+  /*
   useEffect(() => {
     setIsAuthenticated(false);
     setAuthToken("faketoken");
   }, []);
+  */
 
   // Get user's account data from the API server
-  // MODIFIED/REDACTED FOR PORTFOLIO!
+  //  NOTE: MODIFIED/REDACTED FOR PORTFOLIO! (bringing in all mock data)
   // Setup API endpoint for user/auth
-  const apiUri = "http://localhost:3001/user";  //REDACTED: Would pass auth token for user!
+  const apiUri = "http://localhost:3001/db"; //REDACTED: Would pass auth token for user!
   useEffect(() => {
-    if (isAuthenticated) {
+    //if (isAuthenticated()) {
       fetch(apiUri)
         .then((response) => {
           if (response.status === 200) {
@@ -59,10 +63,10 @@ function App(props) {
         .finally(() => {
           //setLoading(false);
         });
-    } else {
-      setMockDataAll({});
-      //setLoading(false);
-    }
+    //} else {
+    //  setMockDataAll(null);
+    //  setLoading(false);
+    //}
   }, []);
 
   // Get html-element attribute data
@@ -72,23 +76,29 @@ function App(props) {
   //if (loading) return "Loading..."; //TODO: Make component for this
   //if (error) return "Error loading data!"; //TODO: Make component for this
 
-  // Prepare page items
-  const appSubtitle = "";
-
   // Render
   return (
     <div
       id={domAttribs.container.id}
       data-testid={domAttribs.container.dataTestId}
     >
+
       <AppHeader
-        isAuthenticated={isAuthenticated}
+        authToken={authToken}
         appTitle={Strings.getAppTitle()}
-        appSubtitle={appSubtitle}
         mainMenuInstance={menuMainApp}
       />
-      <AppBody isAuthenticated={isAuthenticated} route={route} data={mockDataAll} />
-      <AppFooter copyright={Strings.getCopyrightLine()} />
+
+      {/* The route (passed in from index.js) is what AppBody uses to determine what to render */}
+      <AppBody
+        authToken={authToken}
+        route={props.route}
+        mockDataAll={mockDataAll}
+      />
+
+      <AppFooter 
+        copyright={Strings.getCopyrightLine()} />
+
     </div>
   );
 }

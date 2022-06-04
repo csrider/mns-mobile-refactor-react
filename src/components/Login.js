@@ -1,7 +1,7 @@
 /*****************************************************
  * MessageNet Connections Mobile v3
  * Component for user login
- * 
+ *
  * DEV-NOTE: Migrate this to a class-component, especially
  * if you want to use more advanced capabilities (such as
  * using setState callbacks, which hooks don't support)!
@@ -17,23 +17,26 @@ import "../styles/Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import axios from "axios";
-import { menuLoggedOut, DomAttribs } from "../values.js";
+//import axios from "axios";
+import { DomAttribs } from "../values.js";
 import DataUtils from "../utilities/DataUtils";
-//import NetUtils from "../utilities/NetUtils";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Login(props) {
   // Setup hooks
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [userRecord, setUserRecord] = useState({});
+  const [fldUsername, setUsername] = useState("");
+  const [fldPassword, setPassword] = useState("");
+  const [authToken, setAuthToken] = useState(null);
+  const navigate = useNavigate();
+  const {pathname, search, hash} = useLocation();
 
   /***************************************************/
   // DEV-NOTE: THIS GETS REMOVED FOR PRODUCTION!
 
   // Retrieve ALL data from the mock API and save to state
-  const [demoData, setDemoData] = useState({});
-  const [demoUserData, setUserDemoData] = useState([]);
+  // DEV-NOTE: Native fetch for now, but maybe use axios?
+  const [demoDataDB, setDemoDataDB] = useState({users:[]});
+  const [demoDataUser, setDemoDataUser] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3001/db")
       .then((response) => {
@@ -43,8 +46,7 @@ function Login(props) {
         throw response;
       })
       .then((objJsonData) => {
-        setDemoData(objJsonData);
-        setUserDemoData(objJsonData.users);
+        setDemoDataDB(objJsonData);
       })
       .catch((error) => {
         console.error(error);
@@ -52,7 +54,7 @@ function Login(props) {
           status: "Error getting mock API data!",
           details: error,
         };
-        setDemoData(jsonError);
+        setDemoDataDB(jsonError);
       })
       .finally(() => {
         //setLoading(false);
@@ -60,71 +62,68 @@ function Login(props) {
   }, []); //empty dependencies array, so only run once
 
   // Handle mock-api/demo login form submission
-
-  // 
-  const [authToken, setAuthToken] = useState("");
   useEffect(() => {
     // Check for valid auth-token (and also only execute this hook if it's been saved)
-    if (authToken.length > 0) {
+    if (authToken !== null) {
       // Allow user to proceed to main screen (pass token via props)
-      console.log("PROCEED TO MAIN!");
+      navigate('/');
     }
   }); //blank dependencies array for now, may specify state later to trigger re-subscription of this hook?
   /***************************************************/
 
   // Get html-element attribute data
-  //const domAttribsApp = DomAttribs.getApp();
   const domAttribsLogin = DomAttribs.getLogin();
-
-  // Prepare page items
-  //const appSubtitle = "";
 
   // Form handling: Input validation
   function handleFormValidate() {
-    return username.length > 0 && password.length > 0;
+    return fldUsername.length > 0 && fldPassword.length > 0;
   }
 
   // Form handling: Submit
   function handleFormSubmit(event) {
-    event.preventDefault(); //ensure page doesn't refresh
+    event.preventDefault(); //ensure page doesn't natively refresh
 
     // Get the username and password from state and package it up
     // DEMO NOTE: Our mock API doesn't easily handle relational data
     //  so just for this purpose, query by user ID that's in state.
     /*
-    const jsonData = {
-      user: username,
-      pass: password,
-    };
-    */
+            const jsonData = {
+              user: username,
+              pass: password,
+            };
+            */
 
     /* TEST TO SEE IF AXIOS-POST / MOCK-API WORKS --it does!
-    const testToken = {
-      "id": 99,
-      "userId": 4,
-      "token": "gh78_userId_4"
-    }
-    await axios.post("http://localhost:3001/", testToken);
-    //await axios.post("http://localhost:3001/", jsonData);
-    //axios.console.error();
-    */
+            const testToken = {
+              "id": 99,
+              "userId": 4,
+              "token": "gh78_userId_4"
+            }
+            await axios.post("http://localhost:3001/", testToken);
+            //await axios.post("http://localhost:3001/", jsonData);
+            //axios.console.error();
+            */
 
     /* PLAYING AROUND
-    const res = await axios.get(`http://localhost:3001/user?byUsername=${username}`);
-    if (res.data[0] && res.data[0].username == username) {
-      setUserRecord(DataUtils.copyDeep_objectOfJSON(res.data[0]));
-    }
-    */
+            const res = await axios.get(`http://localhost:3001/user?byUsername=`);
+            if (res.data[0] && res.data[0].username == username) {
+              setUserRecord(DataUtils.copyDeep_objectOfJSON(res.data[0]));
+            }
+            */
 
     // For our purpose here, without a real API, we just authenticate statically
     // TODO: since we await above, reset a to-be-developed "loading" state to normal HERE
 
-    // FOR DEMO, JUST MATCH LOGIN WITH DATA ALREADY LOCALIZED
-    // - Parse the auth-token from local data and save to state
-    // - That save (and resulting render) will trigger useEffect hook that will...
-    //    useEffect: Check for valid auth-token, and allow user to proceed to main screen (pass token via props)
-    const locAuthToken = DataUtils.parseAuthTokenByUsername(demoData, username);
-    if (locAuthToken.length > 0) setAuthToken(locAuthToken);
+    /**********************************************************/
+    /* FOR DEMO, JUST MATCH LOGIN WITH DATA ALREADY LOCALIZED */
+    // Parse this user's record from their username
+    const objUserRecord = DataUtils.parseUserRecordByUsername(demoDataDB, fldUsername);
+    setDemoDataUser(objUserRecord);
+    // Parse the auth-token from local data and save to state
+    // That save (and resulting render) will trigger useEffect hook that will...
+    //  useEffect: Check for valid auth-token, and allow user to proceed to main screen (pass token via props)
+    const locAuthToken = DataUtils.parseAuthTokenByUserId(demoDataDB, objUserRecord.id);
+    if (locAuthToken !== null) setAuthToken(locAuthToken);
   }
 
   // Render
@@ -136,9 +135,8 @@ function Login(props) {
           data-testid={domAttribsLogin.form.dataTestId}
           onSubmit={handleFormSubmit}
         >
-          <Form.Group size="lg" controlId="username">
+          <Form.Group size="lg" controlId="fldUsername">
             <Form.Label
-              id={domAttribsLogin.userLabel.id}
               data-testid={domAttribsLogin.userLabel.dataTestId}
               className={domAttribsLogin.userLabel.classes}
             >
@@ -146,29 +144,26 @@ function Login(props) {
             </Form.Label>
             <Form.Control
               autoFocus
-              id={domAttribsLogin.userField.id}
               data-testid={domAttribsLogin.userField.dataTestId}
               className={domAttribsLogin.userField.classes}
               type="text"
-              value={username}
+              value={fldUsername}
               onChange={(e) => setUsername(e.target.value)}
             />
           </Form.Group>
 
-          <Form.Group size="lg" controlId="password">
+          <Form.Group size="lg" controlId="fldPassword">
             <Form.Label
-              id={domAttribsLogin.passLabel.id}
               data-testid={domAttribsLogin.passLabel.dataTestId}
               className={domAttribsLogin.passLabel.classes}
             >
               Password
             </Form.Label>
             <Form.Control
-              id={domAttribsLogin.passField.id}
               data-testid={domAttribsLogin.passField.dataTestId}
               className={domAttribsLogin.passField.classes}
               type="password"
-              value={password}
+              value={fldPassword}
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
@@ -182,7 +177,6 @@ function Login(props) {
               id={domAttribsLogin.loginButton.id}
               data-testid={domAttribsLogin.loginButton.dataTestId}
               className={domAttribsLogin.loginButton.classes}
-              block
               size="lg"
               type="submit"
               disabled={!handleFormValidate()}
@@ -216,21 +210,24 @@ function Login(props) {
             <th>Password</th>
           </tr>
         </thead>
-        {demoUserData.map((userObj) => (
-          <tbody>
-            <tr>
+        <tbody>
+          {demoDataDB.users.map((userObj) => (
+            <tr key={userObj.id}>
               <td style={{ fontWeight: "bold" }}>User #{userObj.id}</td>
               <td>
                 {userObj.first_name} {userObj.last_name}
               </td>
               <td>
-                {DataUtils.parseUserClassNameById(demoData, userObj.userClassId)}
+                {DataUtils.parseUserClassNameById(
+                  demoDataDB,
+                  userObj.userClassId
+                )}
               </td>
               <td>{userObj.username}</td>
               <td>{userObj.password}</td>
             </tr>
-          </tbody>
-        ))}
+          ))}
+        </tbody>
       </table>
     </>
   );

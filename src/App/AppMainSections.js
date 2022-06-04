@@ -22,10 +22,17 @@ import Login from "../components/Login";
 /** App Main Header Component */
 function AppHeader(props) {
   // Extract our props
-  const isAuthenticated = props.isAuthenticated;
   const appTitle = props.appTitle;
   const appSubtitle = props.appSubtitle;
   const menuInstance = props.mainMenuInstance;
+
+  // Setup state hooks
+  const [authToken, setAuthToken] = useState(props.authToken || null);
+
+  // Define some readability enhancements
+  // DEV-NOTE: later see about passing forward as handlers, and allowing calls/events back (DRY)
+  const isAuthenticated = () => Boolean(authToken); //DEV-NOTE: make more robust if developed, obviously
+  const unAuthenticate = () => setAuthToken(null);
 
   // Get element attribute data
   const domAttribs = DomAttribs.getAppHeader();
@@ -102,20 +109,22 @@ function AppHeader(props) {
 
 /** App Main Header Component */
 function AppBody(props) {
-  // Extract our props
-  const route = props.route;
-  const isAuthenticated = props.isAuthenticated;
-  const data = props.data;
+  // Setup state hooks
+  const [authToken, setAuthToken] = useState(props.authToken || null);
+  const [mockDataAll, setMockDataAll] = useState(props.mockDataAll || null); //FAKE FOR PORTFOLIO
+  //const [loading, setLoading] = useState(true);
+  //const [error, setError] = useState(null);
 
-  // Setup hooks
-  const [mockDataAll, setMockDataAll] = useState(null); //FAKE FOR PORTFOLIO
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Define some readability enhancements
+  // DEV-NOTE: later see about passing forward as handlers, and allowing calls/events back (DRY)
+  const isAuthenticated = () => Boolean(authToken); //DEV-NOTE: make more robust if developed, obviously
+  //const unAuthenticate = () => setAuthToken(null);
 
   // Get user's message data from the API server
   // MODIFIED/REDACTED FOR PORTFOLIO!
   const apiUri = "http://localhost:3001/data"; //NOTE: Would pass auth token!
   useEffect(() => {
+    return
     if (isAuthenticated) {
       fetch(apiUri)
         .then((response) => {
@@ -129,14 +138,14 @@ function AppBody(props) {
         })
         .catch((error) => {
           console.error("Error fetching message data", error);
-          setError(error);
+          //setError(error);
         })
         .finally(() => {
-          setLoading(false);
+          //setLoading(false);
         });
     } else {
-      setMockDataAll({});
-      setLoading(false);
+      setMockDataAll(null);
+      //setLoading(false);
     }
   }, []);
 
@@ -148,26 +157,31 @@ function AppBody(props) {
   //if (error) return "Error loading data!"; //TODO: Make component for this
 
   // Render
-  if (isAuthenticated) {
+  if (isAuthenticated()) {
     return (
       <main
         id={domAttribs.container.id}
         data-testid={domAttribs.container.dataTestId}
       >
-        <code>{JSON.stringify(data)}</code>
-      </main>
-    );
-  } 
-  if (route === "login") {
-    return (
-      <main
-        id={domAttribs.container.id}
-        data-testid={domAttribs.container.dataTestId}
-      >
-        <Login />
+      
+        {JSON.stringify(props.mockDataAll) /*loaded by App component before this*/}
+      
       </main>
     );
   }
+  
+  //if (props.route === "login") {
+    return (
+      <main
+        id={domAttribs.container.id}
+        data-testid={domAttribs.container.dataTestId}
+      >
+
+        <Login />
+      
+      </main>
+    );
+  //}
 }
 
 /** App Main Header Component */

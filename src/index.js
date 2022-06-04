@@ -15,7 +15,10 @@ import { createRoot } from 'react-dom/client';
 import './styles/index.css';
 import App from './App/App';
 //import Client from './models/Client'; //STRIPPED OUT FOR PORTFOLIO REDACTION
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+// Expose BrowserRouter
+export const browserRouterRef = React.createRef();
 
 // Get our injection point
 const appInjectionNode = document.getElementById('root');
@@ -28,9 +31,9 @@ root.render(
       <Routes>
         {/* TODO: migrate hardcoded strings to values.js 
             Also, need to review whether this is the best design pattern! */}
-        <Route path="/" element={<App route="main" />} />
-        <Route path="/about" element={<App route="about" />} />
+        <Route exact path="/" element={<App route="main" />} />
         <Route path="/login" element={<App route="login" />} />
+        <Route path="/about" element={<App route="about" />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
